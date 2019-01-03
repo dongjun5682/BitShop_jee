@@ -4,41 +4,150 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BitShop Class1</title>
+<title>메인 메뉴</title>
 <style>
-.menu {
+#wrapper {
+	width: 100%;
+	height: 100%;
+	border: 3px solid gray;
 }
-.menu>h1 {
-	padding: 5px;
-	text-align: center;
+
+#wrapper tr {
+	border: 1px solid gray;
 }
-.link {
+
+#wrapper tr td {
+	border: 1px solid gray;
 	text-align: center;
 }
 
-.link>a {
+#side-menu {
+	width: 15%;
+}
+
+.menubar {
+	border: none;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans",
+		"Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica,
+		sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.menubar ul {
+	background: rgb(109, 109, 109);
+	height: 50px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menubar li {
+	float: left;
+	padding: 0px;
+}
+
+.menubar li a {
+	background: rgb(109, 109, 109);
+	color: #cccccc;
+	display: block;
+	font-weight: normal;
+	line-height: 50px;
+	margin: 0px;
+	padding: 0px 25px;
+	text-align: center;
 	text-decoration: none;
 }
-img{
+
+.menubar li a:hover, .menubar ul li:hover a {
+	background: rgb(71, 71, 71);
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.menubar li ul {
+	background: rgb(109, 109, 109);
+	display: none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
+	height: auto;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	position: absolute;
+	width: 200px;
+	z-index: 200;
+	/*top:1em;
+/*left:0;*/
+}
+
+.menubar li:hover ul {
+	display: block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+}
+
+.menubar li li {
+	background: rgb(109, 109, 109);
 	display: block;
-	margin: 0px auto;
+	float: none;
+	margin: 0px;
+	padding: 0px;
+	width: 200px;
+}
+
+.menubar li:hover li a {
+	background: none;
+}
+
+.menubar li ul a {
+	display: block;
+	height: 50px;
+	font-size: 12px;
+	font-style: normal;
+	margin: 0px;
+	padding: 0px 10px 0px 15px;
+	text-align: left;
+}
+
+.menubar li ul a:hover, .menubar li ul li:hover a {
+	background: rgb(71, 71, 71);
+	border: 0px;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.menubar p {
+	clear: left;
 }
 </style>
 </head>
 <body>
-	<header>
-		<div class="menu" >
-			<img src="<%= request.getContextPath() %>/resources/img/NYE1-19.jpg" width= 800px height=300px/>
-			<h1 >메뉴</h1>
-			<div class="link">
-				<a href="member/main.jsp">회원관리</a> 
-				<a href="">계좌관리</a> 
-				<a href="">게시판</a>
-				<a href="">관리자</a>
-			</div>
-		</div>
-	</header>
+	<table id="wrapper">
+		<tr>
+			<td colspan="2" background="url()">
+				<h1>Bit Shop Mall</h1>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
 
+				<div class="menubar">
+					<ul>
+						<li><a href="member.do">홈</a></li>
+						<li><a href="member.do">회원관리</a></li>
+						<li><a href="account.do">계좌관리</a></li>
+						<li><a href="article.do">게시판</a></li>
+						<li><a href="admin.do">관리자</a></li>
+					</ul>
+				</div>
+			</td>
+
+		</tr>
+		<tr style="height: 300px; width: 300px;">
+			<td id="side-menu"></td>
+			<td></td>
+		</tr>
+	</table>
 
 </body>
 </html>

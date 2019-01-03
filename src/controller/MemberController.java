@@ -2,12 +2,13 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import command.Command;
 
 /**
  * Servlet implementation class MemberController
@@ -16,23 +17,35 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		String pass =request.getParameter("pass");
-		if(id.equals("dongjun" ) && pass.equals("1234")){
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/home/main.jsp");
-			rd.forward(request, response);
-		}else{
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
-			rd.forward(request, response);
+		String cmd = request.getParameter("cmd");
+		String dir = request.getParameter("dir");
+		String page = request.getParameter("page");
+		if(dir == null){
+			dir = request.getServletPath().substring(1, request.getServletPath().indexOf("."));
 		}
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if(page == null){
+			page = "main";
+		}
+		switch ((cmd == null) ? "move" : cmd) {
+		case "login":
+			String id = request.getParameter("id");
+			String pass =request.getParameter("pass");
+		
+			if(id.equals("dongjun" ) && pass.equals("1234")){
+				Command.move(request, response, dir+"/"+page);
+			}else{
+				Command.move(request, response, "index");
+			}
+			break;
+		case "move":
+			Command.move(request, response, "member/main");
+			break;
+		
+		}
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

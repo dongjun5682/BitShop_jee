@@ -135,8 +135,8 @@
 					<ul>
 						<li><a href="member.do">홈</a></li>
 						<li><a href="member.do">회원관리</a></li>
-						<li><a href="account.do"><font color="red">계좌관리</font></a></li>
-						<li><a href="article.do">게시판</a></li>
+						<li><a href="account.do">계좌관리</a></li>
+						<li><a href="article.do"><font color="yellow">게시판</font></a></li>
 						<li><a href="admin.do">관리자</a></li>
 					</ul>
 				</div>
@@ -147,31 +147,25 @@
 			<td id="side-menu">
 			<table>
 				<tr>
-					<td>계좌개설</td>
+					<td>글쓰기</td>
 				</tr>
 				<tr>
-					<td>계좌목록</td>
+					<td>글 목록</td>
 				</tr>
 				<tr>
-					<td>계좌검색(이름)</td>
+					<td>글 검색(글쓴이)</td>
 				</tr>
 				<tr>
-					<td>계좌검색(계좌번호)</td>
+					<td>글 검색(글번호)</td>
 				</tr>
 				<tr>
-					<td>총계좌수</td>
+					<td>글 갯수</td>
 				</tr>
 				<tr>
-					<td>계좌번호체크</td>
+					<td>글 정보 수정</td>
 				</tr>
 				<tr>
-					<td>입금</td>
-				</tr>
-				<tr>
-					<td>출금</td>
-				</tr>
-				<tr>
-					<td>계좌삭제</td>
+					<td>글삭제</td>
 				</tr>
 			</table>
 			
