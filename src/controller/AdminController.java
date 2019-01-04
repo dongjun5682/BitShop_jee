@@ -19,11 +19,19 @@ public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("==========admin로 진입===========");
-		String action = request.getParameter("action");
-		switch ((action == null) ? "move" : action) {
+		System.out.println("==========관리자 서블릿으로 진입===========");
+		String cmd = request.getParameter("cmd");
+		cmd = (cmd == null) ? "move" : cmd;
+		String dir = request.getParameter("dir");
+		if (dir == null) {
+			dir = request.getServletPath().substring(1, request.getServletPath().indexOf("."));
+		}
+		String page = request.getParameter("page");
+		page = (page == null) ? "main" : page;
+
+		switch (cmd) {
 		case "move":
-			Command.move(request, response, "admin/main");
+			Command.move(request, response, dir,page);
 			break;
 		}
 	}

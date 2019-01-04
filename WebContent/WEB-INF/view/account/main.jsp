@@ -24,7 +24,9 @@
 #side-menu {
 	width: 15%;
 }
-
+#side-menu table{
+	margin: 0 auto;
+}
 .menubar {
 	border: none;
 	border: 0px;
@@ -133,7 +135,7 @@
 
 				<div class="menubar">
 					<ul>
-						<li><a href="member.do">홈</a></li>
+						<li><a href="home.do">홈</a></li>
 						<li><a href="member.do">회원관리</a></li>
 						<li><a href="account.do"><font color="red">계좌관리</font></a></li>
 						<li><a href="article.do">게시판</a></li>

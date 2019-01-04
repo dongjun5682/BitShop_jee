@@ -23,8 +23,8 @@ fieldset{
 			<form action="member.do">
 			<fieldset>
 			<legend>MEMBER LOGIN</legend>
-			<input type="text" name="id" placeholder="ID" value="dongjun"/><br />
-			<input type="password" name="pass" placeholder="PASSWORD" value="1234"/><br /> 
+			<input type="text" name="uid" placeholder="ID" value="dongjun"/><br />
+			<input type="password" name="upass" placeholder="PASSWORD" value="1234"/><br /> 
 			 <input type="hidden" name="cmd" value="login" />
 			 <input type="hidden" name="dir" value="home" />
 			 <input type="hidden" name="page" value="main" />
