@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
+import domain.AccountBean;
+import service.AccountService;
+import service.AccountServiceImpl;
 
 /**
  * Servlet implementation class AccountController
@@ -19,6 +22,8 @@ public class AccountController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		AccountService accountService = new AccountServiceImpl();
+		
 		System.out.println("==========계좌 서블릿으로 진입===========");
 		String cmd = request.getParameter("cmd");
 		cmd = (cmd == null) ? "move" : cmd;
@@ -28,11 +33,17 @@ public class AccountController extends HttpServlet {
 		}
 		String page = request.getParameter("page");
 		page = (page == null) ? "main" : page;
-
+		
 		switch (cmd) {
 		case "move":
 			Command.move(request, response, dir,page);
 			break;
+		case "open-account":
+			String money = request.getParameter("money");
+			String accountNum = accountService.openAccount(Integer.parseInt(money));
+			AccountBean account= accountService.findByAccountNum(accountNum);
+			request.setAttribute("account", account);
+			Command.move(request, response, dir, page);
 		}
 	}
 

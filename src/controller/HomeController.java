@@ -29,6 +29,7 @@ public class HomeController extends HttpServlet {
 
 		switch (cmd) {
 		case "move":
+			request.setAttribute("name","dongjun");
 			Command.move(request, response, dir,page);
 			break;
 		}

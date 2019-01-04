@@ -5,17 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Index Page</title>
-<style>
-.container{
-	text-align: center;
-}
-fieldset{
-	text-align: center;
-	width:300px;
-	margin: 0 auto; 
-	margin-top: 30px;
-}
-</style>
+
+<link rel="stylesheet" href="resources/css/style.css"/>
+
 </head>
 <body>
 	<div class="container">

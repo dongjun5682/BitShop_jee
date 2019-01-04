@@ -38,6 +38,7 @@ public class MemberController extends HttpServlet {
 				dir = "";
 				page = "index";
 			}
+			request.setAttribute("name","dongjun");
 			Command.move(request, response, dir,page);
 			break;
 		case "move":

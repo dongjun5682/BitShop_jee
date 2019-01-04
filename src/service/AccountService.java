@@ -1,13 +1,16 @@
 package service;
 
+import domain.AccountBean;
+
 public interface AccountService {
-
-	public void createAccountNum(int money);
 	
+	public String openAccount(int money);
+	public String createAccountNum();
 	public void list();
-
+	public AccountBean findByAccountNum(String accountNum);
 	public void countAccountNum();
-	public void existAccountNum(String accountNum);
+	public AccountBean existAccountNum(String accountNum);
+	public String makeToday();
 	
 	public void depositUpdate(String accountNum);
 	public void withdrawalUpdate(String accountNum);
