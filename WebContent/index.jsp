@@ -14,7 +14,7 @@
 	<h2>회원 전용 시스템</h2>
 			<form action="member.do">
 			<fieldset>
-			<legend>MEMBER LOGIN</legend>
+			<legend>MEMBER LOGIN </legend>
 			<input type="text" name="uid" placeholder="ID" value="dongjun"/><br />
 			<input type="password" name="upass" placeholder="PASSWORD" value="1234"/><br /> 
 			 <input type="hidden" name="cmd" value="login" />
@@ -24,7 +24,7 @@
 			 <input type="submit" id="btn" value="LOGIN" />
 			</fieldset>
 				<a id ="admin-link" href="#">관리자</a>
-				<a id ="join-link" href="#">회원관리</a>
+				<a id ="join-link" href="member.do?dest=join-form">회원가입</a>
 
 		</form>
 	

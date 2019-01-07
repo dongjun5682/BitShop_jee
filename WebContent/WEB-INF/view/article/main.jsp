@@ -30,34 +30,15 @@
 
 		</tr>
 		<tr style="height: 300px; width: 300px;">
-			<td id="side-menu">
-			<table>
-				<tr>
-					<td>글쓰기</td>
-				</tr>
-				<tr>
-					<td>글 목록</td>
-				</tr>
-				<tr>
-					<td>글 검색(글쓴이)</td>
-				</tr>
-				<tr>
-					<td>글 검색(글번호)</td>
-				</tr>
-				<tr>
-					<td>글 갯수</td>
-				</tr>
-				<tr>
-					<td>글 정보 수정</td>
-				</tr>
-				<tr>
-					<td>글삭제</td>
-				</tr>
-			</table>
-			
-			
+			<td>
+			<%@ include file="side-menu.jsp" %>
+			<td>
+				content
 			</td>
-			<td></td>
+			<tr style="width:100px">
+			<td colspan="2">
+			<%@ include file="../home/footer.jsp" %>
+			</td>
 		</tr>
 	</table>
 

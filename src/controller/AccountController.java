@@ -36,13 +36,17 @@ public class AccountController extends HttpServlet {
 		
 		switch (cmd) {
 		case "move":
+			request.setAttribute("cmd", cmd);
 			Command.move(request, response, dir,page);
 			break;
 		case "open-account":
+			request.setAttribute("cmd", cmd);
 			String money = request.getParameter("money");
+			System.out.println("입금:"+money);
 			String accountNum = accountService.openAccount(Integer.parseInt(money));
 			AccountBean account= accountService.findByAccountNum(accountNum);
 			request.setAttribute("account", account);
+			page = "main";
 			Command.move(request, response, dir, page);
 		}
 	}

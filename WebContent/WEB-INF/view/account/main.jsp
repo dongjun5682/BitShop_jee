@@ -24,48 +24,24 @@
 
 		</tr>
 		<tr style="height: 300px; width: 300px;">
-			<td id="side-menu">
-			<table>
-				<tr>
-					<td>계좌개설</td>
-				</tr>
-				<tr>
-					<td>계좌목록</td>
-				</tr>
-				<tr>
-					<td>계좌검색(이름)</td>
-				</tr>
-				<tr>
-					<td>계좌검색(계좌번호)</td>
-				</tr>
-				<tr>
-					<td>총계좌수</td>
-				</tr>
-				<tr>
-					<td>계좌번호체크</td>
-				</tr>
-				<tr>
-					<td>입금</td>
-				</tr>
-				<tr>
-					<td>출금</td>
-				</tr>
-				<tr>
-					<td>계좌삭제</td>
-				</tr>
-			</table>
+			<td>
+			<%@ include file="side-menu.jsp" %>
 			</td>
 			<td>
-			<div>
-			<form action="account.do">
-				<h1>계좌 개설</h1>
-				입금색 : <input type="text" name="money" />
-				<input type="hidden" name="cmd" value="open-account" />
-				<input type="hidden" name="page" value="open-result" />
-				<input type="submit" id="btn" value="확 인" />
-			</form>
-			
-			</div>
+			<%
+			String cmd = request.getAttribute("cmd").toString();
+			switch(cmd){
+			case "move":
+				%>
+				<%@ include file="content.jsp" %>
+				<%
+				break;
+			case "open-account":
+				%>
+				<%@ include file="open-result.jsp" %>
+				<%break;
+			}
+			%>
 			</td>
 		</tr>
 		<tr style="width:100px">

@@ -28,11 +28,12 @@ public class AccountServiceImpl implements AccountService {
 	public AccountBean findByAccountNum(String accountNum) {
 		AccountBean account = new AccountBean();
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getAccountNum().equals(accountNum)) {
+			if (account.equals(list.get(i).getAccountNum())) {
 				account = list.get(i);
 				break;
 			}
 		}
+		System.out.println(account);
 		return account;
 	}
 

@@ -16,6 +16,7 @@
 	text-align: center;
 }
 #side-menu{
+	display:table;
 	width:15%;
 }
 #side-menu table{
@@ -110,4 +111,3 @@ fieldset{
 	margin: 0 auto; 
 	margin-top: 30px;
 }
-
