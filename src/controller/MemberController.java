@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
+import domain.MemberBean;
+import service.MemberService;
+import service.MemberServiceImpl;
 
 /**
  * Servlet implementation class MemberController
@@ -19,6 +22,7 @@ public class MemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		MemberBean member = null;
 		System.out.println("==========멤버 서블릿으로 진입===========");
 		String cmd = request.getParameter("cmd");
 		cmd = (cmd == null) ? "move" : cmd;
@@ -38,18 +42,28 @@ public class MemberController extends HttpServlet {
 				dir = "";
 				page = "index";
 			}
-			request.setAttribute("name","dongjun");
-			Command.move(request, response, dir,page);
+			request.setAttribute("name", "dongjun");
+			Command.move(request, response, dir, page);
 			break;
 		case "move":
 			String dest = request.getParameter("dest");
-			if(dest == null){
+			if (dest == null) {
 				dest = "NONE";
 			}
 			request.setAttribute("dest", dest);
-			Command.move(request, response, dir,page);
+			Command.move(request, response, dir, page);
 			break;
-
+		case "join":
+			member = new MemberBean();
+			request.setAttribute("dest", "mypage");
+			member.setId(request.getParameter("id"));
+			member.setName(request.getParameter("name"));
+			member.setPass(request.getParameter("pass"));
+			member.setSsn(request.getParameter("ssn"));
+			MemberServiceImpl.getInstance().joinMember(member);
+			request.setAttribute("member", MemberServiceImpl.getInstance().findById(member.getId()));
+			Command.move(request, response, dir, page);
+			break;
 		}
 
 	}

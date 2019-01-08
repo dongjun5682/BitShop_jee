@@ -22,13 +22,24 @@
 		</tr>
 		<tr style="height: 300px; width: 300px;">
 			<td>
-			<%@ include file="side-menu.jsp" %>
+			<%
+			String dest = String.valueOf(request.getAttribute("dest"));
+			if(dest.equals("join-from")){
+				%>
+				<%@ include file="side-menu.jsp"	%>
+				<%
+			}else{
+				%>
+				<%@ include file="side-join.jsp" %>
+				<%
+			}
+			%>
 			</td>
 			<td>
 				<%
-				String dest = request.getAttribute("dest").toString();
+				dest = request.getAttribute("dest").toString();
 				switch(dest){
-				case"none":
+				case"NONE":case "mypage":
 					%>
 					<%@ include file="mypage.jsp" %>
 					<%

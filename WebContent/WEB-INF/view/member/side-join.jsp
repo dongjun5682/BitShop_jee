@@ -3,14 +3,7 @@
 <div id="side-menu">
 	<table>
 		<tr>
-			<td>마이페이지</td>
+			<td>회원가입 주의사항</td>
 		</tr>
-		<tr>
-			<td>회원정보 수정</td>
-		</tr>
-		<tr>
-			<td>회원 탈퇴</td>
-		</tr>
-
 	</table>
 </div>

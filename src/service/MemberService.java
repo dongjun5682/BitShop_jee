@@ -1,12 +1,14 @@
 package service;
 
+import domain.MemberBean;
+
 public interface MemberService {
 
-	public void joinMember(String id,String name, String pass, String ssn );
+	public void joinMember(MemberBean member);
 	
 	public void listMembers();
 	public void findByName(String name);
-	public void findById(String id);
+	public MemberBean findById(String id);
 	
 	public void countMember();
 	public void existMember(String id,String pass);

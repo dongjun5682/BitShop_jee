@@ -7,4 +7,7 @@ CREATE TABLE meber(
  name VARCHAR2(10),
  ssn VARCHAR2(14),
 );
+INSERT INTO member(id, name, pass, ssn)
+VALUES('hong', '홍길동', '1', '900101-1234567');
 
+SELECT * FROM member;
