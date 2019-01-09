@@ -22,7 +22,7 @@ public class AccountController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AccountService accountService = new AccountServiceImpl();
+		AccountBean account = null;
 		
 		System.out.println("==========계좌 서블릿으로 진입===========");
 		String cmd = request.getParameter("cmd");
@@ -40,12 +40,12 @@ public class AccountController extends HttpServlet {
 			Command.move(request, response, dir,page);
 			break;
 		case "open-account":
+			account = new AccountBean();
 			request.setAttribute("cmd", cmd);
 			String money = request.getParameter("money");
 			System.out.println("입금:"+money);
-			String accountNum = accountService.openAccount(Integer.parseInt(money));
-			AccountBean account= accountService.findByAccountNum(accountNum);
-			request.setAttribute("account", account);
+			request.setAttribute("account", AccountServiceImpl.getInstance().findByAccountNum(
+					AccountServiceImpl.getInstance().createAccount(Integer.parseInt(money))));
 			page = "main";
 			Command.move(request, response, dir, page);
 		}

@@ -1,44 +1,48 @@
 package service;
 
+import java.util.ArrayList;
+
 import dao.MemberDAOImpl;
 import domain.MemberBean;
 
 public class MemberServiceImpl implements MemberService {
 
 	private static MemberServiceImpl instance = new MemberServiceImpl();
-
 	private MemberServiceImpl() {
+		dao = MemberDAOImpl.getInstance();
 	}
-	public static MemberServiceImpl getInstance(){
-		return instance;
-	}
+	public static MemberServiceImpl getInstance(){return instance;}
+	
+	MemberDAOImpl dao;
 	
 	@Override
-	public void joinMember(MemberBean member) {
-		MemberDAOImpl.getInstance().insertMember(member);
+	public void createMember(MemberBean member) {
+		dao.insertMember(member);
 	}
 
 	@Override
-	public void listMembers() {
-		// TODO Auto-generated method stub
+	public ArrayList<MemberBean> filndAllMembers() {
+		ArrayList<MemberBean> list = new ArrayList<>();
+		list = dao.selectAllMembers();
+		return list;
+	}
+
+	@Override
+	public ArrayList<MemberBean> findMembersByName(String name) {
+		ArrayList<MemberBean> list = new ArrayList<>();
+		return list;
 
 	}
 
 	@Override
-	public void findByName(String name) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public MemberBean findById(String id) {
+	public MemberBean findMemberById(String id) {
 		MemberBean member = new MemberBean();
-		System.out.println("멤버 아이디 ::"+member.getId());
+		member = dao.selectById(id);
 		return member;
 	}
 
 	@Override
-	public void countMember() {
+	public void countMembers() {
 		// TODO Auto-generated method stub
 
 	}
@@ -50,13 +54,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updatePass(String id, String pass, String newPass) {
-		// TODO Auto-generated method stub
+	public void changMember(MemberBean member) {
 
 	}
 
 	@Override
-	public void deleteMember(String id, String pass) {
+	public void removeMember(String id, String pass) {
 		// TODO Auto-generated method stub
 
 	}

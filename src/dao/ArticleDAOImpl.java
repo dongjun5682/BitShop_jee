@@ -5,19 +5,19 @@ import java.sql.ResultSet;
 
 import java.util.ArrayList;
 
-import domain.AccountBean;
+import domain.ArticleBean;
 import factory.DatabaseFactory;
 
-public class AccountDAOImpl implements AccountDAO {
-	
-	private static AccountDAOImpl instance = new AccountDAOImpl();
-	private AccountDAOImpl(){}
-	public static AccountDAOImpl getInstance() {return instance;}
+public class ArticleDAOImpl implements ArticleDAO {
 
+	private static ArticleDAOImpl instance = new ArticleDAOImpl();
+	private ArticleDAOImpl(){}
+	public static ArticleDAOImpl getInstance() {return instance;}
+	
 	private ResultSet rs;
 	
 	@Override
-	public void insertAccount(AccountBean account) {
+	public void insertArticle(ArticleBean article) {
 		try {
 			String sql = String.format("", "");
 			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
@@ -35,8 +35,8 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public ArrayList<AccountBean> selectAllAccounts() {
-		ArrayList<AccountBean> list = new ArrayList<>();
+	public ArrayList<ArticleBean> selectAllArticle() {
+		ArrayList<ArticleBean> list = new ArrayList<>();
 		try {
 			String sql = "select * from member";
 			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
@@ -53,8 +53,8 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public AccountBean selectAccountNum(String accountNum) {
-		AccountBean account = new AccountBean();
+	public ArrayList<ArticleBean> selectArticleByWriters(String writer) {
+		ArrayList<ArticleBean> list = new ArrayList<>();
 		try {
 			String sql = "select * from member";
 			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
@@ -66,11 +66,30 @@ public class AccountDAOImpl implements AccountDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return account;
+		
+		return list;
 	}
 
 	@Override
-	public int countAccount() {
+	public ArticleBean selectArticleBySeq(String seq) {
+		ArticleBean article = new ArticleBean();
+		try {
+			String sql = "select * from member";
+			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return article;
+	}
+
+	@Override
+	public int countArticle() {
 		int count = 0;
 		try {
 			String sql = "select * from member";
@@ -86,10 +105,10 @@ public class AccountDAOImpl implements AccountDAO {
 		
 		return count;
 	}
-	
-	public boolean existAccount(String accountNum){
+
+	@Override
+	public boolean existWriter(String writer) {
 		boolean exist = false;
-		
 		try {
 			String sql = "select * from member";
 			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
@@ -101,11 +120,12 @@ public class AccountDAOImpl implements AccountDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return exist;
 	}
-	
+
 	@Override
-	public void updateDeposit(String accountNum, String depositMoney) {
+	public void updateContent(String content) {
 		try {
 			String sql = String.format("", "");
 			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
@@ -120,11 +140,10 @@ public class AccountDAOImpl implements AccountDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
-	public void updateWithdrawal(String accountNum, String withdrawalMoney) {
+	public void updateTilte(String tilte) {
 		try {
 			String sql = String.format("", "");
 			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
@@ -138,11 +157,11 @@ public class AccountDAOImpl implements AccountDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	@Override
-	public void deleteAccount(String accountNum) {
+	public void deleteArticle(String seq) {
 		try {
 			String sql = String.format("", "");
 			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
@@ -156,7 +175,7 @@ public class AccountDAOImpl implements AccountDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 
 }

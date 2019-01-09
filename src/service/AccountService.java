@@ -1,20 +1,22 @@
 package service;
 
+import java.util.ArrayList;
+
 import domain.AccountBean;
 
 public interface AccountService {
 	
-	public String openAccount(int money);
+	public String createAccount(int money);
 	public String createAccountNum();
-	public void list();
+	public ArrayList<AccountBean> findAllAccounts();
 	public AccountBean findByAccountNum(String accountNum);
-	public void countAccountNum();
+	public int countAccount();
 	public AccountBean existAccountNum(String accountNum);
 	public String makeToday();
 	
-	public void depositUpdate(String accountNum);
-	public void withdrawalUpdate(String accountNum);
+	public void depositChangeMoney(String accountNum,String depositMoney);
+	public void withdrawalChangeMoney(String accountNum,String withdrawalMoney);
 	
-	public void deleteAccountNum(String accountNum);
+	public void removeAccount(String accountNum);
 	
 }

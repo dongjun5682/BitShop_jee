@@ -8,13 +8,18 @@ import java.util.Random;
 import domain.AccountBean;
 
 public class AccountServiceImpl implements AccountService {
-	private ArrayList<AccountBean> list;
 	
-	public AccountServiceImpl() {
-		list =new ArrayList<>();
+	private static AccountServiceImpl instance = new AccountServiceImpl();
+	
+	private AccountServiceImpl(){
+		list = new ArrayList<>();
 	}
+	public static AccountServiceImpl getInstance(){return instance;}
+	
+	ArrayList<AccountBean> list;
+
 	@Override
-	public String openAccount(int money) {
+	public String createAccount(int money) {
 		AccountBean account = new AccountBean();
 		account.setAccountNum(createAccountNum());
 		account.setMoney(money);
@@ -23,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
 		list.add(account);
 		return accountNum;
 	}
-	
+
 	@Override
 	public AccountBean findByAccountNum(String accountNum) {
 		AccountBean account = new AccountBean();
@@ -36,66 +41,58 @@ public class AccountServiceImpl implements AccountService {
 		return account;
 	}
 
-	
-	
 	@Override
 	public String createAccountNum() {
 		Random random = new Random();
-		String accountNum="";
+		String accountNum = "";
 		for (int i = 0; i < 8; i++) {
-			if(i != 3){
+			if (i != 3) {
 				accountNum += random.nextInt(10);
-			}else{
-				accountNum += random.nextInt(10)+"-";
+			} else {
+				accountNum += random.nextInt(10) + "-";
 			}
 		}
 		return accountNum;
 	}
-	
+
 	@Override
 	public String makeToday() {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(date);
 	}
-	
-	
+
 	@Override
-	public void list() {
-		// TODO Auto-generated method stub
+	public ArrayList<AccountBean> findAllAccounts() {
+		ArrayList<AccountBean> list = new ArrayList<>();
+		return list;
 
 	}
 
 	@Override
-	public void countAccountNum() {
-		// TODO Auto-generated method stub
-
+	public int countAccount() {
+		int count = 0;
+		return count;
 	}
 
 	@Override
 	public AccountBean existAccountNum(String accountNum) {
 		AccountBean account = new AccountBean();
-
 		return account;
 	}
 
 	@Override
-	public void depositUpdate(String accountNum) {
-		// TODO Auto-generated method stub
+	public void depositChangeMoney(String accountNum, String depositMoney) {
+	}
+
+	@Override
+	public void withdrawalChangeMoney(String accountNum, String withdrawalMoney) {
 
 	}
 
 	@Override
-	public void withdrawalUpdate(String accountNum) {
-		// TODO Auto-generated method stub
+	public void removeAccount(String accountNum) {
 
 	}
-
-	@Override
-	public void deleteAccountNum(String accountNum) {
-		// TODO Auto-generated method stub
-
-	}
-
 
 }

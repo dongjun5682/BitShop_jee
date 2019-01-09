@@ -11,3 +11,5 @@ INSERT INTO member(id, name, pass, ssn)
 VALUES('hong', '홍길동', '1', '900101-1234567');
 
 SELECT * FROM member;
+
+DELETE FROM member where name = '서동준';

@@ -1,19 +1,21 @@
 package service;
 
+import java.util.ArrayList;
+
 import domain.MemberBean;
 
 public interface MemberService {
 
-	public void joinMember(MemberBean member);
+	public void createMember(MemberBean member);
 	
-	public void listMembers();
-	public void findByName(String name);
-	public MemberBean findById(String id);
+	public ArrayList<MemberBean> filndAllMembers();
+	public ArrayList<MemberBean> findMembersByName(String name);
+	public MemberBean findMemberById(String id);
 	
-	public void countMember();
+	public void countMembers();
 	public void existMember(String id,String pass);
 	
-	public void updatePass(String id,String pass, String newPass);
+	public void changMember(MemberBean member);
 	
-	public void deleteMember(String id,String pass);
+	public void removeMember(String id,String pass);
 }

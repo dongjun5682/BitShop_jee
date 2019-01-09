@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
 import domain.MemberBean;
-import service.MemberService;
 import service.MemberServiceImpl;
 
 /**
@@ -60,10 +60,12 @@ public class MemberController extends HttpServlet {
 			member.setName(request.getParameter("name"));
 			member.setPass(request.getParameter("pass"));
 			member.setSsn(request.getParameter("ssn"));
-			MemberServiceImpl.getInstance().joinMember(member);
-			request.setAttribute("member", MemberServiceImpl.getInstance().findById(member.getId()));
+			MemberServiceImpl.getInstance().createMember(member);
+			request.setAttribute("member", MemberServiceImpl.getInstance().findMemberById(member.getId()));
+			System.out.println( MemberServiceImpl.getInstance().filndAllMembers());
 			Command.move(request, response, dir, page);
 			break;
+			
 		}
 
 	}
