@@ -10,6 +10,9 @@
 		키 : <br /><input type="text" name="height" /><br />
 		몸무게 : <br /><input type="text" name= "weight"/><br />
 		<input type="hidden" name="cmd" value="join" />
+		<input type="hidden" name="dir" value="home" />
+		<input type="hidden" name="dest" value="welcome" />
+		
 	<br><input type="submit" id="btn" value="회원가입"/>
 	</form>
 

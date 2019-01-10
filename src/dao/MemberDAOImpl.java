@@ -1,7 +1,12 @@
 package dao;
 
+import java.sql.Connection;
+
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+
 import domain.MemberBean;
 import factory.DatabaseFactory;
 
@@ -16,17 +21,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return Instance;
 	}
 
-	private ResultSet rs;
 
 	@Override
 	public void insertMember(MemberBean member) {
 		try {
-			// rs = stmt.executeQuery(sql);
-			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
+			int rs = DatabaseFactory
+					.createDatabase("oracle")
+					.getConnection()
+					.createStatement()
 					.executeUpdate(String.format("INSERT INTO member(id,name,pass,ssn)" + "VALUES('%s','%s','%s','%s')",
 							member.getId(), member.getName(), member.getPass(), member.getSsn()));
 
-			if (a == 1) {
+			if (rs == 1) {
 				System.out.println("회원가입 성공!");
 			} else {
 				System.out.println("회원가입 실패!");
@@ -41,16 +47,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public ArrayList<MemberBean> selectAllMembers() {
 		ArrayList<MemberBean> list = new ArrayList<>();
 		try {
-
 			String sql = "select * from member";
-			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
-
+			ResultSet rs =DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
+			
 			while (rs.next()) {
 				MemberBean member = new MemberBean();
-				System.out.println(rs.getString("id"));
-				System.out.println(rs.getString("name"));
-				System.out.println(rs.getString("pass"));
-				System.out.println(rs.getString("ssn"));
 				list.add(member);
 
 			}
@@ -58,7 +59,7 @@ public class MemberDAOImpl implements MemberDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("selectBY :::::::" + list);
+		System.out.println("selectBY1 :::::::" + list);
 
 		return list;
 
@@ -69,7 +70,7 @@ public class MemberDAOImpl implements MemberDAO {
 		ArrayList<MemberBean> list = new ArrayList<>();
 		try {
 			String sql = String.format("", "");
-			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
+			ResultSet rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,12 +80,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberBean selectById(String id) {
-		MemberBean member = new MemberBean();
+	public MemberBean selectMemberById(String id) {
+		MemberBean member = null;
 		try {
-			String sql = String.format("", "");
-			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
+		
+			ResultSet rs = DatabaseFactory
+					.createDatabase("oracle")
+					.getConnection()
+					.createStatement()
+					.executeQuery(String.format("SELECT * FROM member\n"
+							+ "WHERE id LIKE '%s'",id));		
 			while (rs.next()) {
+				member = new MemberBean();
 				member.setId(rs.getString("id"));
 				member.setName(rs.getString("name"));
 				member.setPass(rs.getString("pass"));
@@ -95,7 +102,6 @@ public class MemberDAOImpl implements MemberDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("selectBY :::::::" + member);
 		return member;
 	}
 
@@ -104,7 +110,7 @@ public class MemberDAOImpl implements MemberDAO {
 		int count = 0;
 		try {
 			String sql = String.format("", "");
-			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
+			ResultSet rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(sql);
 			while (rs.next()) {
 
 			}
@@ -120,9 +126,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 		try {
 			String sql = String.format("", "");
-			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
+			int rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
 					.executeUpdate(sql);
-			if (a == 1) {
+			if (rs == 1) {
 				System.out.println("입금성공!!");
 			} else {
 				System.out.println("입금실패");
@@ -137,9 +143,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 		try {
 			String sql = String.format("", "");
-			int a = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
+			int rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
 					.executeUpdate(sql);
-			if (a == 1) {
+			if (rs == 1) {
 				System.out.println("출금성공!!");
 			} else {
 				System.out.println("출금실패");
@@ -147,6 +153,21 @@ public class MemberDAOImpl implements MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean existMember(String id, String pass) {
+		boolean exist = true;
+		try {
+			ResultSet rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
+					.executeQuery(String.format("SELECT * FROM member WHERE id LIKE '%s' AND pass LIKE '%s' ",id,pass));
+			while(rs.next()){
+				exist = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exist;
 	}
 
 }

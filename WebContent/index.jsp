@@ -15,11 +15,12 @@
 			<form action="member.do">
 			<fieldset>
 			<legend>MEMBER LOGIN </legend>
-			<input type="text" name="uid" placeholder="ID" value="dongjun"/><br />
-			<input type="password" name="upass" placeholder="PASSWORD" value="1234"/><br /> 
+			<input type="text" name="uid" placeholder="ID"/><br />
+			<input type="password" name="upass" placeholder="PASSWORD"/><br /> 
 			 <input type="hidden" name="cmd" value="login" />
 			 <input type="hidden" name="dir" value="home" />
-			 <input type="hidden" name="page" value="main" />
+			 <input type="hidden" name="dest" value="welcome" />
+				
 			 	<div style="margin:5px;"></div>
 			 <input type="submit" id="btn" value="LOGIN" />
 			</fieldset>

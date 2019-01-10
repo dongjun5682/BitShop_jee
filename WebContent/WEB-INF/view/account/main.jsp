@@ -22,7 +22,7 @@
 			String cmd = request.getAttribute("cmd").toString();
 			switch(cmd){
 			case "move":
-				%> <%@ include file="content.jsp"%> <%
+				%> <%@ include file="open-form.jsp"%> <%
 				break;
 			case "open-account":
 				%> <%@ include file="open-result.jsp"%> <%break;

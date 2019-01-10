@@ -12,10 +12,11 @@ public interface MemberDAO {
 
 	public ArrayList<MemberBean> selectMembersByNames(String name);
 
-	public MemberBean selectById(String id);
+	public MemberBean selectMemberById(String id);
 
 	public int countMembers();
-
+	public boolean existMember(String id, String pass);
+	
 	public void updateMember(String id, String pass, String newPass);
 
 	public void deleteMember(String id, String pass);

@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
 import domain.MemberBean;
+import service.MemberService;
 import service.MemberServiceImpl;
 
 /**
@@ -22,6 +22,7 @@ public class MemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		MemberService memberService = MemberServiceImpl.getInstance(); 
 		MemberBean member = null;
 		System.out.println("==========멤버 서블릿으로 진입===========");
 		String cmd = request.getParameter("cmd");
@@ -32,41 +33,50 @@ public class MemberController extends HttpServlet {
 		}
 		String page = request.getParameter("page");
 		page = (page == null) ? "main" : page;
-
+		
+		String dest = request.getParameter("dest");
+		if(dest == null) {page = "NONE";}
+		
 		switch (cmd) {
 		case "login":
+			member = new MemberBean();
 			String id = request.getParameter("uid");
 			String pass = request.getParameter("upass");
-
-			if (!(id.equals("dongjun") && pass.equals("1234"))) {
+			boolean loginOk = memberService.existMember(id, pass);
+			if (loginOk) {
 				dir = "";
 				page = "index";
+				dest = "";
+				
+			}else{
+				member = MemberServiceImpl.getInstance().findMemberById(id);
+				request.setAttribute("member", member);
+				request.setAttribute("dest",dest);
 			}
-			request.setAttribute("name", "dongjun");
-			Command.move(request, response, dir, page);
+			
 			break;
 		case "move":
-			String dest = request.getParameter("dest");
-			if (dest == null) {
-				dest = "NONE";
-			}
 			request.setAttribute("dest", dest);
-			Command.move(request, response, dir, page);
 			break;
 		case "join":
 			member = new MemberBean();
-			request.setAttribute("dest", "mypage");
 			member.setId(request.getParameter("id"));
 			member.setName(request.getParameter("name"));
 			member.setPass(request.getParameter("pass"));
 			member.setSsn(request.getParameter("ssn"));
 			MemberServiceImpl.getInstance().createMember(member);
-			request.setAttribute("member", MemberServiceImpl.getInstance().findMemberById(member.getId()));
-			System.out.println( MemberServiceImpl.getInstance().filndAllMembers());
-			Command.move(request, response, dir, page);
+			member = MemberServiceImpl.getInstance().findMemberById(member.getId());
+			request.setAttribute("member", member);
+			request.setAttribute("dest", request.getParameter("dest"));
+	
 			break;
-			
+		case "logout":
+			dir = "";
+			page = "index";
+			dir = "";
+			break;
 		}
+		Command.move(request, response, dir, page);
 
 	}
 

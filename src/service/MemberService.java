@@ -13,7 +13,7 @@ public interface MemberService {
 	public MemberBean findMemberById(String id);
 	
 	public void countMembers();
-	public void existMember(String id,String pass);
+	public boolean existMember(String id,String pass);
 	
 	public void changMember(MemberBean member);
 	

@@ -19,7 +19,21 @@
 				<%@ include file="side-menu.jsp" %>
 			</td>
 			<td>
-				<%@ include file="content.jsp" %>
+			<%
+				String dest = request.getAttribute("dest").toString();
+				switch(dest){
+				case "NONE":
+					%>
+					<%@ include file="content.jsp" %>
+					<%
+					break;
+				case "welcome":
+					%>
+					<%@ include file="welcome.jsp"%>
+					<%
+					break;
+				}
+				%>
 			</td>
 		</tr>
 		<tr style="width:100px">

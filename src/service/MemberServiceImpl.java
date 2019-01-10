@@ -22,9 +22,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ArrayList<MemberBean> filndAllMembers() {
-		ArrayList<MemberBean> list = new ArrayList<>();
-		list = dao.selectAllMembers();
-		return list;
+		return dao.selectAllMembers();
 	}
 
 	@Override
@@ -36,9 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberBean findMemberById(String id) {
-		MemberBean member = new MemberBean();
-		member = dao.selectById(id);
-		return member;
+		return dao.selectMemberById(id);
 	}
 
 	@Override
@@ -48,9 +44,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void existMember(String id, String pass) {
-		// TODO Auto-generated method stub
-
+	public boolean existMember(String id, String pass) {
+		return 	dao.existMember(id, pass);
 	}
 
 	@Override

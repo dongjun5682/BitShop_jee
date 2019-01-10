@@ -21,7 +21,7 @@ MemberBean member = (MemberBean)request.getAttribute("member");
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td><%=member.getPass() %></td>
+		<td><%=member.getName() %></td>
 	</tr>
 	<tr>
 		<td>주민번호</td>
