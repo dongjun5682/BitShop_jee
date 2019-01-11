@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import command.Command;
 import domain.MemberBean;
@@ -22,7 +23,8 @@ public class MemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		MemberService memberService = MemberServiceImpl.getInstance(); 
+
+		MemberService memberService = MemberServiceImpl.getInstance();
 		MemberBean member = null;
 		System.out.println("==========멤버 서블릿으로 진입===========");
 		String cmd = request.getParameter("cmd");
@@ -37,6 +39,7 @@ public class MemberController extends HttpServlet {
 		String dest = request.getParameter("dest");
 		if(dest == null) {page = "NONE";}
 		
+		HttpSession session = request.getSession();
 		switch (cmd) {
 		case "login":
 			member = new MemberBean();
@@ -44,16 +47,14 @@ public class MemberController extends HttpServlet {
 			String pass = request.getParameter("upass");
 			boolean loginOk = memberService.existMember(id, pass);
 			if (loginOk) {
+				member = MemberServiceImpl.getInstance().findMemberById(id);
+				session.setAttribute("user", member);
+				request.setAttribute("dest", dest);
+
+			} else {
 				dir = "";
 				page = "index";
-				dest = "";
-				
-			}else{
-				member = MemberServiceImpl.getInstance().findMemberById(id);
-				request.setAttribute("member", member);
-				request.setAttribute("dest",dest);
 			}
-			
 			break;
 		case "move":
 			request.setAttribute("dest", dest);
@@ -66,15 +67,16 @@ public class MemberController extends HttpServlet {
 			member.setSsn(request.getParameter("ssn"));
 			MemberServiceImpl.getInstance().createMember(member);
 			member = MemberServiceImpl.getInstance().findMemberById(member.getId());
-			request.setAttribute("member", member);
-			request.setAttribute("dest", request.getParameter("dest"));
-	
+			session.setAttribute("user", member);
+			request.setAttribute("dest", dest);
+
 			break;
 		case "logout":
 			dir = "";
 			page = "index";
-			dir = "";
+			session.invalidate();
 			break;
+	
 		}
 		Command.move(request, response, dir, page);
 

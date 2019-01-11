@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 
+
 import dao.MemberDAOImpl;
 import domain.MemberBean;
 
@@ -45,7 +46,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean existMember(String id, String pass) {
-		return 	dao.existMember(id, pass);
+		boolean exist = false;
+		MemberBean member = new MemberBean();
+		member = dao.existMember(id, pass);
+		if(member != null){
+			exist = true;
+		}
+		return exist;
 	}
 
 	@Override

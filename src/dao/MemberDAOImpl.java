@@ -156,18 +156,20 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public boolean existMember(String id, String pass) {
-		boolean exist = true;
+	public MemberBean existMember(String id, String pass) {
+		MemberBean member = null;
 		try {
 			ResultSet rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
 					.executeQuery(String.format("SELECT * FROM member WHERE id LIKE '%s' AND pass LIKE '%s' ",id,pass));
 			while(rs.next()){
-				exist = false;
+				member = new MemberBean();
+				member.setId(rs.getString("id"));
+				member.setPass(rs.getString("pass"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return exist;
+		return member;
 	}
 
 }

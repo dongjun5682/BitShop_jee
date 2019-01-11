@@ -20,19 +20,15 @@
 			</td>
 			<td>
 			<%
-				String dest = request.getAttribute("dest").toString();
+				String dest = String.valueOf(request.getAttribute("dest"));
 				switch(dest){
-				case "NONE":
-					%>
-					<%@ include file="content.jsp" %>
-					<%
-					break;
 				case "welcome":
 					%>
 					<%@ include file="welcome.jsp"%>
 					<%
 					break;
 				}
+				
 				%>
 			</td>
 		</tr>

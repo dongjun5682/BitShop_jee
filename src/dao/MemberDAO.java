@@ -15,7 +15,7 @@ public interface MemberDAO {
 	public MemberBean selectMemberById(String id);
 
 	public int countMembers();
-	public boolean existMember(String id, String pass);
+	public MemberBean existMember(String id, String pass);
 	
 	public void updateMember(String id, String pass, String newPass);
 
